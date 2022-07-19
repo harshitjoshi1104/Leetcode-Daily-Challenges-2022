@@ -1,0 +1,12 @@
+def generate(self, numRows: int) -> List[List[int]]:
+        dp=[[1],[1,1]]
+        if numRows<2:
+            return dp[:numRows]
+        
+        for i in range(2,numRows):
+            newarr=[1]
+            for i in range(len(dp[-1])-1):
+                newarr.append(dp[-1][i]+dp[-1][i+1])
+            newarr.append(1)
+            dp.append(newarr)
+        return dp
