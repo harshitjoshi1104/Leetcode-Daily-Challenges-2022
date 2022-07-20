@@ -1,0 +1,22 @@
+def numMatchingSubseq(self, s: str, words: List[str]) -> int:
+    count=0
+    hashTable={}
+    for word in words: # 5000
+        i=len(s)-1
+        j=len(word)-1
+        if word in hashTable:
+            if hashTable[word]==True:
+                count+=1
+            continue
+        while j>=0 and i>=0:
+            if s[i]==word[j]:
+                i-=1
+                j-=1
+            else:
+                i-=1
+        if j==-1:
+            hashTable[word]=True
+            count+=1
+        else:
+            hashTable[word]=False
+    return count        					
