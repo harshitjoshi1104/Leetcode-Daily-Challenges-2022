@@ -1,0 +1,27 @@
+def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:temp=dummy=ListNode(-1,head)
+    i=0
+    while i<right+1:
+        if i==left-1:
+            newLeft=temp
+            temp=temp.next
+
+        elif i==left:
+            if temp:
+                q=temp.next
+            if q:
+                r=q.next
+
+        elif left<i<=right:
+            q.next=temp
+            temp=q
+            q=r
+            if q:
+                r=q.next    
+
+        else:
+            temp=temp.next
+        i+=1
+    newRight=q
+    newLeft.next.next=newRight
+    newLeft.next=temp
+    return dummy.next
