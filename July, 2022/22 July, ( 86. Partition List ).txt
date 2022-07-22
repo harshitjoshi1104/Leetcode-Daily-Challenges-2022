@@ -1,0 +1,28 @@
+def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
+    if not head:
+        return None
+    dummy=ListNode(0,head)
+    smaller=dummy
+    largerF=head
+
+    while largerF:
+        if largerF.val<x:
+            smaller=largerF                
+            largerF=largerF.next
+        else:
+            break
+
+    largerL=largerF
+    if not largerL:
+        return dummy.next
+
+    while largerL.next:
+        if largerL.next.val>=x:
+            largerL=largerL.next
+        else:
+            smaller.next=largerL.next
+            largerL.next=largerL.next.next
+            smaller=smaller.next
+            smaller.next=largerF
+
+    return dummy.next
