@@ -1,0 +1,10 @@
+def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+    adj=list(zip(*matrix))
+    endCol=bisect.bisect_right(matrix[0],target)
+    endRow=bisect.bisect_right(adj[0],target)
+
+    for i in range(endRow):
+        for j in range(endCol):
+            if matrix[i][j]==target:
+                return True
+    return False
