@@ -1,0 +1,27 @@
+def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':ist=[]
+    l2_list=[]
+
+    def Helper(root,target1,target2,l1):
+        nonlocal l1_list,l2_list
+        if root==None:
+            return
+        if root==target1:
+            l1_list=l1[:]+[root]
+        if root==target2:                
+            l2_list=l1[:]+[root]
+        l1.append(root)
+        Helper(root.left,target1,target2,l1)
+        Helper(root.right,target1,target2,l1)
+        l1.pop()
+        return
+
+    Helper(root,p,q,[])
+    ans=l1_list[0]
+    for i in range(min(len(l1_list),len(l2_list))-1):
+        if l1_list[i+1].val!=l2_list[i+1].val:
+            ans=l1_list[i]
+            return ans
+        ans=l1_list[i+1]
+
+    return ans
+
