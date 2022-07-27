@@ -1,0 +1,30 @@
+def flatten(self, root: Optional[TreeNode]) -> None:
+
+    Do not return anything, modify root in-place instead.
+    """
+    def Helper(root):
+        if not root:
+            return None,None
+
+        leftHead,leftTail=Helper(root.left)
+
+        rightHead,rightTail=Helper(root.right)
+
+        if leftHead==None and rightHead==None:
+            return root,root
+
+        if not leftHead:
+            root.right=rightHead
+            return root,rightTail
+        if not rightHead:
+            root.left=None
+            root.right=leftHead
+            return root,leftTail
+
+        leftTail.right=rightHead
+        root.left=None
+        root.right=leftHead
+
+        return root,rightTail
+
+    Helper(root)
