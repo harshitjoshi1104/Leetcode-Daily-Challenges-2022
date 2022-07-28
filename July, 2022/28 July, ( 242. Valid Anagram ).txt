@@ -1,0 +1,14 @@
+def isAnagram(self, s: str, t: str) -> bool:
+    if len(s)!=len(t):
+        return False
+
+    s=collections.Counter(s)
+    t=collections.Counter(t)
+
+    for item in s:
+        if item not in t:
+            return False
+        if s[item]!=t[item]:
+            return False
+
+    return True
