@@ -1,0 +1,25 @@
+def findAndReplacePattern(self, words: List[str], pattern: str) -> List[str]:
+    ans=[]
+    for word in words:
+        if len(word)!=len(pattern):
+            continue
+        else:
+            hashTable={}
+            hashTable2={}
+            flag=0
+            for i in range(len(pattern)):
+                if pattern[i] in hashTable:
+                    if hashTable[pattern[i]]==word[i]:
+                        pass
+                    else:
+                        flag=1
+                        break 
+                elif word[i] in hashTable2:
+                    flag=1
+                    break
+                else:
+                    hashTable[pattern[i]]=word[i]
+                    hashTable2[word[i]]=pattern[i]
+            if flag==0:
+                ans.append(word)
+    return ans
