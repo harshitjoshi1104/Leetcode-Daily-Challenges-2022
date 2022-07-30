@@ -1,0 +1,31 @@
+def wordSubsets(self, words1: List[str], words2: List[str]) -> List[str]:
+    hashTable={}
+    for i in words2[0]:
+        if i in hashTable:
+            hashTable[i]+=1
+        else:
+            hashTable[i]=1
+    for word in words2:
+        word=collections.Counter(word)
+        for item in word:
+            if item in hashTable:
+                if hashTable[item]<word[item]:
+                    hashTable[item]=word[item]
+            else:
+                hashTable[item]=word[item]
+    ans=[]
+    for word in words1:
+        wording=collections.Counter(word)
+        flag=0
+        for item in hashTable:
+            if item not in wording:
+                flag=1
+                break
+            else:
+                if wording[item]<hashTable[item]:
+                    flag=1
+                    break
+                else: pass
+        if flag==0:
+            ans.append(word)
+    return ans
