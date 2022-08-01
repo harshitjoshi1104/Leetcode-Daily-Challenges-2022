@@ -1,0 +1,18 @@
+def uniquePaths(self, m: int, n: int) -> int:
+    hashTable={}
+    def Helper(row,col):
+        if row<0 or col<0 or row>=m or col>=n:
+            return 0
+        if (row,col)==(m-1,n-1):
+            return 1
+
+        if (row,col) in hashTable:
+            return hashTable[(row,col)]
+
+
+        right=Helper(row,col+1)
+        down=Helper(row+1,col)
+        hashTable[(row,col)]=right+down
+        return right+down
+
+    return Helper(0,0)

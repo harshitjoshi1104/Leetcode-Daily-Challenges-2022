@@ -1,0 +1,72 @@
+class TreeNode:
+    
+    def __init__(self,val,ranges):
+        self.val=val
+        self.ranges=ranges
+        self.left=None
+        self.right=None
+
+class NumArray:
+
+    def __init__(self, nums: List[int]):
+        # self.root=None
+        # l=len(nums)
+        # self.count=1
+        # nums=nums+[0 for i in range((3*pow(10,4))-l)]
+        def Helper(low,high,nums):
+            if low==high:
+                node=TreeNode(nums[low],[low,low])
+                return node
+            
+            mid=(low+high)//2
+
+            left=Helper(low,mid,nums)
+            right=Helper(mid+1,high,nums)
+            
+            node=TreeNode(left.val+right.val,[low,high])
+            node.left=left
+            node.right=right
+            return node
+        self.root=Helper(0,len(nums)-1,nums)
+        # print(self.root.val,self.root.left.val,self.root.right.val)
+                
+        
+        
+
+    def update(self, index: int, val: int) -> None:
+        # print(self.count)
+        # self.count+=1
+        root=self.root
+        def Helper(root):
+            if root.ranges==[index,index]:
+                root.val=val
+                return val
+            
+            if root.left.ranges[0]<=index<=root.left.ranges[1]:
+                root.val=root.right.val+Helper(root.left)
+                return root.val
+            else:
+                root.val=root.left.val+Helper(root.right)
+                return root.val
+        Helper(root)
+        
+
+    def sumRange(self, left: int, right: int) -> int:
+        # print(self.count)
+        # self.count+=1
+        root=self.root
+        def Helper(root,low,high):
+            if root.ranges==[low,high]:
+                return root.val
+            
+            if root.left.ranges[0]<=low<=high<=root.left.ranges[1]:
+                return Helper(root.left,low,high)
+            if root.right.ranges[0]<=low<=high<=root.right.ranges[1]:
+                return Helper(root.right,low,high)
+            
+            val=root.left.ranges[1]
+            
+            return Helper(root.left,low,val)+Helper(root.right,val+1,high)
+            
+        val=Helper(root,left,right)
+        return val
