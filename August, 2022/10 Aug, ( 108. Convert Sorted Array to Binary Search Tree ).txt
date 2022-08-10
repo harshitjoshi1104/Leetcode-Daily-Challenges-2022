@@ -1,0 +1,14 @@
+def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
+    def Helper(nums):
+        if len(nums)==0:
+            return None
+        if len(nums)==1:
+            return TreeNode(nums[0])
+        mid=len(nums)//2
+        node=TreeNode(nums[mid])
+        node.left=Helper(nums[:mid])
+        node.right=Helper(nums[mid+1:])
+
+        return node
+
+    return Helper(nums)
