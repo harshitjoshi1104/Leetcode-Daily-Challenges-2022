@@ -1,0 +1,21 @@
+def isValidBST(self, root: Optional[TreeNode]) -> bool:
+    prev=-100000000000000000000
+    isTrue=True
+
+    def Helper(node):
+        nonlocal prev
+        nonlocal isTrue
+        if not isTrue: return
+
+        if node==None: return
+
+        Helper(node.left)
+        if node.val<=prev:
+            isTrue=False
+            return
+        prev=node.val
+        Helper(node.right)
+        return
+
+    Helper(root)
+    return isTrue
