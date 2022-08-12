@@ -1,0 +1,19 @@
+def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+    Helper(root,target):
+        if root==None:
+            return
+        if root.val==target.val:
+            return [root]
+        if root.val>target.val:
+            return [root]+Helper(root.left,target)
+        else:
+            return [root]+Helper(root.right,target)
+
+    l1=Helper(root,p)
+    l2=Helper(root,q)
+    i=0
+    while i<min(len(l1),len(l2)):
+        if l1[i]!=l2[i]:
+            return l1[i-1]
+        i+=1
+    return l1[i-1]
