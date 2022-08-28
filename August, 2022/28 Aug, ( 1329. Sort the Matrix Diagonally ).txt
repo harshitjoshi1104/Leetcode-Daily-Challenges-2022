@@ -1,0 +1,14 @@
+def diagonalSort(self, mat: List[List[int]]) -> List[List[int]]:
+    hashTable={}
+    for i in range(len(mat)):
+        for j in range(len(mat[0])):
+            if i-j in hashTable:
+                hashTable[i-j].add(mat[i][j])
+            else:
+                hashTable[i-j]=SortedList([mat[i][j]])
+
+    for i in range(len(mat)):
+        for j in range(len(mat[0])):
+            value=hashTable[i-j].pop(0)
+            mat[i][j]=value
+    return mat
