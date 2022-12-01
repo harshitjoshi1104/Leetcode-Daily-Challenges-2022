@@ -1,0 +1,9 @@
+def halvesAreAlike(self, s: str) -> bool:
+    Y,N=0,0
+    lastid=len(s)-1
+    for i in range(len(s)//2):
+        if s[i] in 'aeiouAEIOU':
+            Y+=1
+        if s[lastid-i] in 'aeiouAEIOU':
+            N+=1
+    return Y==N
